@@ -1,0 +1,101 @@
+$vis: rgba(255,255,255,1);
+$trans: rgba(255,255,255,0);
+$speed: .7s;
+$size: 59px;
+
+@keyframes glim-dot {
+    0% { opacity: 0.01; }
+    50% { opacity: 1; }
+    100% { opacity: 0.01; }
+}
+
+@keyframes glim-vertical {
+    from { background-position: 0 100%; }
+    to { background-position: 0 -100%; }
+}
+
+@keyframes glim-horizontal {
+    from { background-position: 100% 0; }
+    to { background-position: -100% 0; }
+}
+
+.glim {
+    top: 0;
+    left: 50%;
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+    background-size: 200%;
+    animation-duration: $speed;
+    animation-timing-function: linear;
+
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: $vis;
+        box-shadow: 0 0 6px rgba(255,255,255,.6);
+        animation: glim-dot ($speed/2) linear;
+        opacity: 0.01;
+    }
+
+    &:after {
+        animation: glim-dot ($speed/2) linear ($speed/2);
+    }
+}
+
+    .glim--vertical--reverse, .glim--horizontal--reverse {
+        animation-direction: reverse;
+
+        &:before { animation-delay: ($speed/2); }
+        &:after { animation-delay: 0s; }
+    }
+
+    // vertical
+    .glim--vertical {
+        width: 1px;
+        height: $size;
+        background-image: linear-gradient(to bottom,
+            $trans 0%,
+            $vis 25%,
+            $vis 25%,
+            $trans 50%
+        );
+        background-position: 0 100%;
+        animation-name: glim-vertical;
+
+        &:before, &:after {
+            left: -1px;
+            top: -2px;
+        }
+
+        &:after {
+            top: 100%;
+            margin-top: -2px;
+        }
+    }
+
+    // horizontal
+    .glim--horizontal {
+        width: $size;
+        height: 1px;
+        background-image: linear-gradient(to right,
+            $trans 0%,
+            $vis 25%,
+            $vis 25%,
+            $trans 50%
+        );
+        background-position: 100% 0;
+        animation-name: glim-horizontal;
+
+        &:before, &:after {
+            top: -1px;
+            left: -2px;
+        }
+
+        &:after {
+            left: 100%;
+            margin-left: -2px;
+        }
+    }

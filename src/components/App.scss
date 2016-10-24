@@ -1,0 +1,70 @@
+@import '~styles/variables';
+
+.app {
+    max-width: 1400px;
+    min-height: 1200px;
+    margin: auto;
+    position: relative;
+}
+
+.title {
+    width: 698px;
+    height: 85px;
+    margin: auto;
+    background: url('../images/title.png') no-repeat;
+    position: absolute;
+    left: 50%;
+    margin-left: -349px;
+}
+
+.top {
+    display: flex;
+    padding: 30px 40px 0;
+    max-width: 1230px;
+    margin: auto;
+}
+
+.typing-box {
+    width: 1379px;
+    height: 731px;
+    background: url('../images/box.png') no-repeat;
+    position: absolute;
+    left: 50%;
+    margin-left: -689.5px;
+    margin-top: 50px;
+    padding: 70px 90px 130px 85px;
+    font-size: 24px;
+    font-family: 'AudimatMonoRegular';
+    line-height: 1.25;
+}
+
+    .typing-box__input {
+        position: absolute;
+        pointer-events: none;
+        opacity: .01;
+    }
+
+.game-status {
+    flex: 1 0 auto;
+    text-align: center;
+    align-self: flex-end;
+    font-size: 120px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+
+    .label {
+        font-size: 22px;
+        display: inline-block;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-left: 6px;
+    }
+}
+
+    .game-status--ahead {
+        color: $positive;
+    }
+
+    .game-status--behind {
+        color: $negative;
+    }

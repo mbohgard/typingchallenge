@@ -1,0 +1,36 @@
+@import '~styles/reset';
+@import '~styles/variables';
+
+@font-face {
+    font-family: 'AudimatMonoRegular';
+    src: url('../fonts/audimrg_-webfont.woff2') format('woff2'),
+         url('../fonts/audimrg_-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AudimatMonoBold';
+    src: url('../fonts/audimb__-webfont.woff2') format('woff2'),
+         url('../fonts/audimb__-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background: url('../images/noise.png'), url('../images/bokeh.jpg');
+    background-size: auto, cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: white;
+    font-family: 'AudimatMonoRegular', serif;
+}
+
+#root {
+    background: url('../images/grid.png');
+    background-position: center top;
+}
