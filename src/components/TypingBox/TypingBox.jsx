@@ -1,33 +1,81 @@
 import React from 'react'
+import { observable, action } from 'mobx'
+import { observer } from 'mobx-react'
 import { autobind } from 'core-decorators'
 
+@observer
 class TypingBox extends React.Component {
+    @observable typed = ''
+
+    error = false
+
+    constructor() {
+        super()
+    }
+
     @autobind
     _handleFocus() {
         this.refs.textArea.focus()
     }
 
     @autobind
-    _handleChange(e) {
-        console.log(e.target.value)
+    @action _handleChange(e) {
+        const value = e.target.value
+
+        this.error = false
+
+        if (value.length <= this.props.text.length) this.typed = value
     }
 
-    _renderLetter(letter, index) {
-        const props = {
-            key: `${letter}-${index}`,
-            id: `l${index}`
+    @autobind
+    _handleBlur(e) {
+        e.target.focus()
+    }
+
+    @autobind
+    _getStatus(char, index) {
+        const typedChar = this.typed[index]
+        const last = index === this.typed.length
+
+        if (last) return 'cursor'
+
+        return typedChar && char === typedChar
+    }
+
+    _renderLetter(char, status, index) {
+        let className = ''
+
+        if (status === false) {
+            className = 'err'
+
+            this.error = true
+        } else if (status === true) {
+            className = this.error ? 'err' : 'ok'
+        } else if (typeof status === 'string') {
+            className = status
         }
 
-        return <i { ...props }>{ letter }</i>
+        const props = {
+            key: `${char}-${index}`,
+            id: `c${index}`,
+            className
+        }
+
+        return <i { ...props }>{ char }</i>
     }
 
     _renderText(text) {
         if (!text) return ''
 
+        let char
+        let status
         let string = []
 
         for (let i = 0; i < text.length; i++) {
-            string.push(this._renderLetter(text[i], i))
+            char = text[i]
+            status = this._getStatus(char, i)
+
+            string.push(this._renderLetter(char, status, i))
         }
 
         return string
@@ -41,7 +89,10 @@ class TypingBox extends React.Component {
                 <textarea
                     className="typing-box__input"
                     ref="textArea"
+                    id="input"
                     onChange={ this._handleChange }
+                    onBlur={ this._handleBlur }
+                    value={ this.typed }
                 />
 
                 <div

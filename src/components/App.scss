@@ -1,5 +1,12 @@
 @import '~styles/variables';
 
+@keyframes cursor {
+    0% { border-color: white }
+    30% { border-color: white }
+    70% { border-color: transparent }
+    100% { border-color: transparent }
+}
+
 .app {
     max-width: 1400px;
     min-height: 1200px;
@@ -36,12 +43,39 @@
     font-size: 24px;
     font-family: 'AudimatMonoRegular';
     line-height: 1.25;
+    letter-spacing: -1;
 }
 
     .typing-box__input {
         position: absolute;
         pointer-events: none;
-        opacity: .01;
+        opacity: 0;
+        left: 50%;
+    }
+
+    .text-container {
+        margin: auto;
+        width: 90vw;
+        max-width: 100%;
+
+        i {
+            border-left: solid 2px transparent;
+        }
+
+        .ok {
+            color: $positive;
+            background: transparentize($positive, .8);
+        }
+
+        .err {
+            color: $negative;
+            background: transparentize($negative, .6);
+        }
+
+        .cursor {
+            border-left: solid 2px white;
+            animation: cursor .3s infinite alternate;
+        }
     }
 
 .game-status {
