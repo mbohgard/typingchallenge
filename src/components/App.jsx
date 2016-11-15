@@ -1,5 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
+import DevTools from 'mobx-react-devtools'
 
 import Player from 'components/Player/Player'
 import Glimmers from 'components/Glimmers/Glimmers'
@@ -30,10 +31,9 @@ class App extends React.Component {
                     <Player type="2" />
                 </div>
 
-                <TypingBox
-                    // text="Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
-                    text="hej hopp alla"
-                />
+                <TypingBox />
+
+                <DevTools />
             </div>
         )
     }

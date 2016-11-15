@@ -21,7 +21,7 @@ if (production) {
 }
 
 module.exports = {
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     entry: [
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://localhost:3000',

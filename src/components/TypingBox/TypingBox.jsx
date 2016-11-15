@@ -1,12 +1,11 @@
 import React from 'react'
-import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 import { autobind } from 'core-decorators'
 
+import GameStore from 'stores/GameStore'
+
 @observer
 class TypingBox extends React.Component {
-    @observable typed = ''
-
     error = false
 
     constructor() {
@@ -19,12 +18,11 @@ class TypingBox extends React.Component {
     }
 
     @autobind
-    @action _handleChange(e) {
+    _handleChange(e) {
         const value = e.target.value
 
         this.error = false
-
-        if (value.length <= this.props.text.length) this.typed = value
+        GameStore.input(value)
     }
 
     @autobind
@@ -34,8 +32,8 @@ class TypingBox extends React.Component {
 
     @autobind
     _getStatus(char, index) {
-        const typedChar = this.typed[index]
-        const last = index === this.typed.length
+        const typedChar = GameStore.typed[index]
+        const last = index === GameStore.typed.length
 
         if (last) return 'cursor'
 
@@ -82,8 +80,6 @@ class TypingBox extends React.Component {
     }
 
     render() {
-        const { text } = this.props
-
         return (
             <div className="typing-box">
                 <textarea
@@ -92,14 +88,14 @@ class TypingBox extends React.Component {
                     id="input"
                     onChange={ this._handleChange }
                     onBlur={ this._handleBlur }
-                    value={ this.typed }
+                    value={ GameStore.typed }
                 />
 
                 <div
                     className="text-container"
                     onClick={ this._handleFocus }
                 >
-                    { this._renderText(text) }
+                    { this._renderText(GameStore.text) }
                 </div>
             </div>
         )
