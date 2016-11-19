@@ -42,7 +42,7 @@
     padding: 70px 90px 130px 85px;
     font-size: 24px;
     font-family: 'AudimatMonoRegular';
-    line-height: 1.25;
+    line-height: 26px;
     letter-spacing: -1;
 }
 
@@ -75,6 +75,21 @@
         .cursor {
             border-left: solid 2px white;
             animation: cursor .3s infinite alternate;
+        }
+
+        .is-line-break {
+            color: transparent;
+            width: 0;
+            display: inline-block;
+            line-height: 26px;
+
+            + .is-line-break {
+                display: block;
+            }
+
+            &.err {
+                width: 14px;
+            }
         }
     }
 

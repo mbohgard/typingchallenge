@@ -41,6 +41,7 @@ class TypingBox extends React.Component {
     }
 
     _renderLetter(char, status, index) {
+        const lineBreak = RegExp(/\n/g).test(char)
         let className = ''
 
         if (status === false) {
@@ -53,13 +54,15 @@ class TypingBox extends React.Component {
             className = status
         }
 
+        if (lineBreak) className += ' is-line-break'
+
         const props = {
             key: `${char}-${index}`,
             id: `c${index}`,
             className
         }
 
-        return <i { ...props }>{ char }</i>
+        return <i { ...props }>{ lineBreak ? '_' : char }</i>
     }
 
     _renderText(text) {
