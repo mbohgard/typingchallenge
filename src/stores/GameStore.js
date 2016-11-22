@@ -1,4 +1,5 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action, computed, autorun } from 'mobx'
+import { autobind } from 'core-decorators'
 
 import texts from '../gameTexts'
 
@@ -24,6 +25,18 @@ class GameStore {
     @observable typed = ''
     @observable texts = texts
     @observable currentTextId = 1
+    @observable running = false
+    @observable done = false
+    @observable gameStart = null
+    @observable gameEnd = null
+    @observable time = null
+
+    constructor() {
+        this.disposer = autorun(() => {
+            if (this.running) this.startGame()
+            else this.endGame()
+        })
+    }
 
     @computed get stats() {
         const text = this.texts[this.currentTextId].text
@@ -41,9 +54,39 @@ class GameStore {
         return this.texts[this.currentTextId].text
     }
 
+    @autobind
+    @action startGame() {
+        this.gameStart = new Date().getTime()
+
+        gameTimer = setInterval(action(() => {
+            const now = new Date().getTime()
+
+            this.time = now - this.gameStart
+        }), 100)
+    }
+
+    @action endGame() {
+        if (!this.gameStart) return
+
+        this.gameEnd = new Date().getTime()
+        this.done = true
+
+        clearInterval(gameTimer)
+    }
+
     @action input(value) {
+        let stats
+
+        if (this.done) return
+
         if (value.length <= this.texts[this.currentTextId].text.length) {
             this.typed = value
+
+            if (!this.running) this.running = true
+
+            stats = this.stats
+
+            if (stats.totalLength === stats.correctLength) this.running = false
         }
     }
 }

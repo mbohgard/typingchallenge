@@ -2,35 +2,41 @@
 
 $shadow: rgba(0,0,0,.5);
 
-@keyframes avatar {
-    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-    25% { transform: rotateX(-10deg) rotateY(20deg) rotateZ(5deg); }
-    50% { transform: rotateX(5deg) rotateY(-5deg) rotateZ(2deg); }
-    75% { transform: rotateX(-5deg) rotateY(-15deg) rotateZ(-5deg); }
-    100% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+@keyframes avatar-player1 {
+    0% { transform: rotateX(10deg) rotateY(10deg) rotateZ(-2deg); }
+    33% { transform: rotateX(15deg) rotateY(30deg) rotateZ(-5deg); }
+    66% { transform: rotateX(2deg) rotateY(5deg) rotateZ(0deg); }
+    100% { transform: rotateX(20deg) rotateY(15deg) rotateZ(-5deg); }
+}
+
+@keyframes avatar-player2 {
+    0% { transform: rotateX(10deg) rotateY(-10deg) rotateZ(2deg); }
+    33% { transform: rotateX(15deg) rotateY(-30deg) rotateZ(5deg); }
+    66% { transform: rotateX(2deg) rotateY(-5deg) rotateZ(0deg); }
+    100% { transform: rotateX(20deg) rotateY(-15deg) rotateZ(5deg); }
 }
 
 @keyframes name-player1 {
-    0% {   transform: rotateX(20deg) rotateY(30deg)   rotateZ(-5deg);  }
-    50% {  transform: rotateX(10deg) rotateY(10deg)  rotateZ(-2deg);  }
-    100% { transform: rotateX(30deg) rotateY(40deg)  rotateZ(-7deg);  }
+    0% {   transform: rotateX(20deg) rotateY(18deg) rotateZ(-4deg);  }
+    50% {  transform: rotateX(10deg) rotateY(5deg) rotateZ(-2deg);  }
+    100% { transform: rotateX(30deg) rotateY(28deg) rotateZ(-5deg);  }
 }
 
 @keyframes name-player2 {
-    0% {   transform: rotateX(20deg) rotateY(-30deg)   rotateZ(5deg);  }
-    50% {  transform: rotateX(10deg) rotateY(-10deg)  rotateZ(2deg);  }
-    100% { transform: rotateX(30deg) rotateY(-40deg)  rotateZ(7deg);  }
+    0% {   transform: rotateX(20deg) rotateY(-18deg) rotateZ(4deg);  }
+    50% {  transform: rotateX(10deg) rotateY(-5deg) rotateZ(2deg);  }
+    100% { transform: rotateX(30deg) rotateY(-28deg) rotateZ(5deg);  }
 }
 
 .player {
     display: flex;
-    perspective: 300px;
     position: relative;
+    width: 50%;
 }
 
     .player__details {
-        transform: rotateX(5deg) rotateY(20deg) rotateZ(-5deg);
         text-align: center;
+        perspective: 300px;
     }
 
         .player__details-avatar {
@@ -39,7 +45,7 @@ $shadow: rgba(0,0,0,.5);
             background-size: cover;
             border: solid 4px #e2f0ff;
             box-shadow: -10px 10px 10px $shadow;
-            animation: avatar 20s ease-in-out infinite alternate;
+            animation: avatar-player1 20s ease-in-out infinite alternate;
         }
 
     .player__name {
@@ -72,6 +78,7 @@ $shadow: rgba(0,0,0,.5);
             display: inline-block;
             margin-left: 6px;
             text-transform: uppercase;
+            text-align: left;
         }
     }
 
@@ -85,14 +92,16 @@ $shadow: rgba(0,0,0,.5);
         }
 
     .player--2 {
+        justify-content: flex-end;
+
         .player__details {
             order: 2;
-            transform: rotateX(5deg) rotateY(-20deg) rotateZ(5deg);
         }
 
             .player__details-avatar {
                 box-shadow: 10px 10px 10px rgba(0,0,0,.5);
                 animation-delay: -7s;
+                animation-name: avatar-player2;
             }
 
         .player__name {
@@ -105,7 +114,7 @@ $shadow: rgba(0,0,0,.5);
         }
 
         .player__status {
-            padding-right: 10px;
+            text-align: right;
         }
 
             .player__status-section--chars {

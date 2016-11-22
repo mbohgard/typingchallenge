@@ -29,6 +29,7 @@
     padding: 30px 40px 0;
     max-width: 1230px;
     margin: auto;
+    position: relative;
 }
 
 .typing-box {
@@ -93,13 +94,17 @@
         }
     }
 
-.game-status {
-    flex: 1 0 auto;
-    text-align: center;
-    align-self: flex-end;
-    font-size: 120px;
+.game-status, .game-time {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: 'Lato', sans-serif;
+}
+
+.game-status {
+    font-size: 120px;
     font-weight: 900;
+    top: 75px;
 
     .label {
         font-size: 22px;
@@ -117,3 +122,11 @@
     .game-status--behind {
         color: $negative;
     }
+
+.game-time {
+    font-size: 35px;
+    top: 195px;
+    letter-spacing: 4px;
+    font-weight: 300;
+    color: rgba(255,255,255,.8);
+}

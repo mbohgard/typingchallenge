@@ -1,9 +1,16 @@
-import { autorun } from 'mobx'
+import { autorun, observable } from 'mobx'
 import { autobind } from 'core-decorators'
 
 import GameStore from 'stores/GameStore'
 
 class RTCStore {
+    @observable stats = {
+        totalLength: 0,
+        typedLength: 0,
+        correctLength: 0,
+        donePercentage: 0
+    }
+
     constructor() {
         this.disposer = autorun(() => {
             this.sendStats(GameStore.stats)

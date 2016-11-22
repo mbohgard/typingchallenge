@@ -10,7 +10,7 @@ const avatar =
     'http://40.media.tumblr.com/62ce3f1d7ffdad447bd7332d49df76d9/tumblr_nmw8mdmvyl1s3hp12o1_1280.jpg'
 
 const Player = observer(({ type }) => {
-    const stats = type === '1' ? GameStore.stats : { donePercentage: 12 }
+    const stats = type === '1' ? GameStore.stats : RTCStore.stats
 
     return (
         <div className={ 'player player--' + type }>
@@ -19,8 +19,9 @@ const Player = observer(({ type }) => {
                     style={ { backgroundImage: `url(${avatar})` } }
                     className="player__details-avatar"
                 />
+                <h2 className="player__name">seriah_killah</h2>
             </div>
-            <h2 className="player__name">seriah_killah</h2>
+            
             <div className="player__status">
                 <div className="player__status-section player__status-section--chars">
                     382
