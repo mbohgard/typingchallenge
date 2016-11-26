@@ -42,10 +42,6 @@ const GameTime = observer(() => (
 ))
 
 class App extends React.Component {
-    componentDidMount() {
-        document.getElementById('input').focus()
-    }
-
     render() {
         return (
             <div className="app">

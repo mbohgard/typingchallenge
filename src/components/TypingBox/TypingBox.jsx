@@ -12,6 +12,10 @@ class TypingBox extends React.Component {
         super()
     }
 
+    componentDidMount() {
+        this.refs.textArea.focus()
+    }
+
     @autobind
     _handleFocus() {
         this.refs.textArea.focus()

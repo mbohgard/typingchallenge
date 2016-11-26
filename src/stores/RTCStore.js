@@ -8,7 +8,13 @@ class RTCStore {
         totalLength: 0,
         typedLength: 0,
         correctLength: 0,
-        donePercentage: 0
+        donePercentage: 0,
+        charsPerMin: 0
+    }
+
+    @observable player = {
+        name: null,
+        avatarUrl: null
     }
 
     constructor() {

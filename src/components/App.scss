@@ -125,8 +125,10 @@
 
 .game-time {
     font-size: 35px;
-    top: 195px;
+    top: 188px;
+    padding: 8px 20px;
     letter-spacing: 4px;
-    font-weight: 300;
-    color: rgba(255,255,255,.8);
+    font-weight: 600;
+    color: rgba(255,255,255,.6);
+    background: rgba(255,255,255,.1);
 }

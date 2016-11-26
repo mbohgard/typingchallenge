@@ -5,7 +5,7 @@ import texts from '../gameTexts'
 
 let gameTimer
 
-function getDone(text, typed) {
+function getDoneStats(text, typed) {
     let index;
 
     for (let i = 0; i < typed.length; i++) {
@@ -29,7 +29,7 @@ class GameStore {
     @observable done = false
     @observable gameStart = null
     @observable gameEnd = null
-    @observable time = null
+    @observable time = 0 // time elapsed in ms
 
     constructor() {
         this.disposer = autorun(() => {
@@ -40,13 +40,15 @@ class GameStore {
 
     @computed get stats() {
         const text = this.texts[this.currentTextId].text
-        const done = getDone(text, this.typed)
+        const doneStats = getDoneStats(text, this.typed)
 
         return {
             totalLength: text.length,
             typedLength: this.typed.length,
-            correctLength: done ? done.length : 0,
-            donePercentage: done ? done.percentage : 0
+            correctLength: doneStats.length,
+            donePercentage: doneStats.percentage,
+            charsPerMin: doneStats.length ?
+                (doneStats.length / (this.time / 60000)) : 0
         }
     }
 

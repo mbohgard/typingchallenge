@@ -58,6 +58,8 @@ $shadow: rgba(0,0,0,.5);
         position: absolute;
         top: 100%;
         left: 0;
+        min-width: 140px;
+        text-align: center;
         animation: name-player1 10s ease-in-out infinite alternate;
     }
 
@@ -106,7 +108,7 @@ $shadow: rgba(0,0,0,.5);
 
         .player__name {
             color: $negative;
-            text-align: right;
+            text-align: center;
             animation-name: name-player2;
             animation-delay: -3s;
             left: auto;
