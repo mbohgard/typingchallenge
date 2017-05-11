@@ -26,11 +26,13 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow: auto;
     color: white;
-    font-family: 'AudimatMonoRegular', serif;
+    font-family: $monospace;
 }
 
 #root {
     background: url('../images/grid.png');
     background-position: center top;
+    overflow: auto;
 }

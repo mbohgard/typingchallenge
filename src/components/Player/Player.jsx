@@ -23,7 +23,7 @@ const Player = observer(({ type }) => {
                     style={ { backgroundImage: `url(${avatar || unsetAvatar})` } }
                     className="player__details-avatar"
                 />
-                <h2 className="player__name">{ name || 'unset' }</h2>
+                <h2 className="player__name">{ name || `Player ${ type }` }</h2>
             </div>
 
             <div className="player__status">

@@ -4,15 +4,11 @@ import { autobind } from 'core-decorators'
 class PlayerStore {
     @observable name = null
     @observable avatarUrl = null
+    @observable ready = true
 
     @autobind
-    @action setName(name) {
-        this.name = name
-    }
-
-    @autobind
-    @action setAvatar(url) {
-        this.avatarUrl = url
+    @action setPlayerInfo(obj) {
+        if (obj.name) this.name = obj.name.value
     }
 }
 

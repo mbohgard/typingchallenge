@@ -4,10 +4,12 @@ import cn from 'classnames'
 import DevTools from 'mobx-react-devtools'
 
 import RTCStore from 'stores/RTCStore'
+import PlayerStore from 'stores/PlayerStore'
 import GameStore from 'stores/GameStore'
 
 import Player from 'components/Player/Player'
 import Glimmers from 'components/Glimmers/Glimmers'
+import Forms from 'components/Forms/Forms'
 import TypingBox from 'components/TypingBox/TypingBox'
 
 import './App.scss'
@@ -41,6 +43,8 @@ const GameTime = observer(() => (
     </div>
 ))
 
+
+
 class App extends React.Component {
     render() {
         return (
@@ -51,14 +55,22 @@ class App extends React.Component {
 
                 <h1 className="title"></h1>
 
-                <div className="top">
-                    <Player type="1" />
-                    <GameStatus />
-                    <GameTime />
-                    <Player type="2" />
-                </div>
+                { !PlayerStore.ready ?
+                    <Forms />
+                :
+                    <div className="game-wrapper">
+                        <div className="top">
+                            <Player type="1" />
+                            <GameStatus />
+                            <GameTime />
+                            <Player type="2" />
+                        </div>
 
-                <TypingBox />
+                        <TypingBox />
+                    </div>
+                }
+
+
 
                 <DevTools />
             </div>
