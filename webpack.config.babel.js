@@ -5,24 +5,25 @@ import webpack from 'webpack';
 import { argv } from 'yargs';
 
 const production = argv.p ? true : false;
+const development = !production
 
 let plugins = [
-    new webpack.HotModuleReplacementPlugin()
-];
+    new webpack.DefinePlugin({
+        'process.env': {
+            'NODE_ENV': JSON.stringify(production ? 'production' : 'development')
+        }
+    })
+]
 
-if (production) {
+if (development) {
     plugins = plugins.concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        })
+        new webpack.HotModuleReplacementPlugin()
     ])
 }
 
 module.exports = {
     devtool: 'source-map',
-    entry: [
+    entry: production ? './src/index' : [
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/only-dev-server',
@@ -35,35 +36,31 @@ module.exports = {
     },
     plugins,
     resolve: {
-        extensions: ['', '.js', '.jsx'],
-        modulesDirectories: ['node_modules', 'src']
+        extensions: ['.js', '.jsx', '.scss'],
+        modules: [
+            path.join(__dirname, 'src'),
+            'node_modules'
+        ]
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(js|jsx)$/,
-                loaders: ['babel'],
+                loader: 'babel-loader',
                 include: path.join(__dirname, 'src')
             },
             {
                 test: /\.(scss|css)$/,
-                loader: 'style-loader!css-loader?sourceMap?root=.!postcss-loader!sass-loader?sourceMap&outputStyle=expanded'
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.svg$/,
-                loaders: ['raw']
+                loader: 'raw-loader'
             },
             {
-                test: /\.png$/,
-                loader: "url-loader?limit=100000"
-            },
-            {
-                test: /\.(jpg|woff|woff2)/,
-                loader: "file-loader"
+                test: /\.(png|jpg|woff|woff2)$/,
+                loader: 'url-loader?limit=10000'
             }
         ]
-    },
-    postcss: function () {
-        return [ autoprefixer({ browsers: ['last 2 versions'] }) ]
     }
 }
